@@ -10,3 +10,9 @@ class ActivePostRequested extends PostsEvent {
 
   ActivePostRequested({required this.postId});
 }
+
+class ActivePostCommentsRequested extends PostsEvent {
+  final int postId;
+
+  ActivePostCommentsRequested({required this.postId});
+}

@@ -32,3 +32,16 @@ class ActivePostFailedToLoad extends PostsState {
 class ActivePostLoading extends PostsState {
   const ActivePostLoading({super.posts});
 }
+
+// Active Post Comments
+class ActivePostCommentsLoaded extends PostsState {
+  const ActivePostCommentsLoaded({required super.activePost, super.posts});
+}
+
+class ActivePostCommentsFailedToLoad extends PostsState {
+  const ActivePostCommentsFailedToLoad({super.posts});
+}
+
+class ActivePostCommentsLoading extends PostsState {
+  const ActivePostCommentsLoading({super.posts});
+}

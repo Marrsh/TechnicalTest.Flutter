@@ -38,4 +38,6 @@ class PostRepository {
       // TODO:: log error when converting to post model (malformed response)
     }
   }
+
+  getPostCommentsById({required int postId}) {}
 }
