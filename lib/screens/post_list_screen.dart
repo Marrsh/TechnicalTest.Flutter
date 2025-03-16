@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tech_task/models/post_model.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
 
 class PostListScreen extends StatefulWidget {
@@ -29,8 +30,10 @@ class _ListPageState extends State<PostListScreen> {
           }
 
           if (postsState is PostsLoaded) {
+            List<PostModel> posts = postsState.posts!;
+
             return ListView(
-              children: postsState.posts.map((post) {
+              children: posts.map((post) {
                 return InkWell(
                   onTap: () {
                     Navigator.of(context)

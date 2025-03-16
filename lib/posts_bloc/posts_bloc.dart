@@ -23,5 +23,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         emit(PostsFailedToLoad());
       }
     });
+
+    on<ActivePostRequested>((event, emit) {});
   }
 }
