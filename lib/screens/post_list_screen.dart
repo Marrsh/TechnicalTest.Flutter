@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tech_task/constants.dart';
-import 'package:flutter_tech_task/models/post_model.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
 
 class PostListScreen extends StatefulWidget {
@@ -12,9 +10,6 @@ class PostListScreen extends StatefulWidget {
 }
 
 class _ListPageState extends State<PostListScreen> {
-  List<PostModel> posts = [];
-  LoadingStatus loadingStatus = LoadingStatus.loading;
-
   @override
   void initState() {
     super.initState();
