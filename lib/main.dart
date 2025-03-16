@@ -1,10 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tech_task/screens/post_details_screen.dart';
 import 'package:flutter_tech_task/screens/post_list_screen.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
