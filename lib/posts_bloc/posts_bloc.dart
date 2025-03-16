@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_tech_task/models/comment_model.dart';
 import 'package:flutter_tech_task/models/post_model.dart';
 import 'package:flutter_tech_task/repositories/post_repository.dart';
 import 'package:meta/meta.dart';
@@ -35,6 +36,22 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       } catch (e) {
         // TODO:: handle error logging
         emit(const ActivePostFailedToLoad());
+      }
+    });
+
+    on<ActivePostCommentsRequested>((event, emit) async {
+      List<PostModel>? posts = state.posts;
+      PostModel? post = state.activePost;
+      emit(ActivePostCommentsLoading(posts: posts, activePost: post));
+      try {
+        List<CommentModel> comments =
+            await PostRepository().getPostCommentsById(postId: event.postId);
+
+        emit(ActivePostCommentsLoaded(
+            posts: posts, activePost: post, comments: comments));
+      } catch (e) {
+        // TODO:: handle error logging
+        emit(const ActivePostCommentsFailedToLoad());
       }
     });
   }

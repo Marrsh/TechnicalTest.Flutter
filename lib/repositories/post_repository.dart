@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tech_task/helpers/network_helper.dart';
+import 'package:flutter_tech_task/models/comment_model.dart';
 import 'package:flutter_tech_task/models/post_model.dart';
 
 class PostRepository {
@@ -39,5 +40,22 @@ class PostRepository {
     }
   }
 
-  getPostCommentsById({required int postId}) {}
+  Future<List<CommentModel>> getPostCommentsById({required int postId}) async {
+    var response =
+        await NetworkHelper().get(endpoint: 'posts/$postId/comments');
+
+    try {
+      var decodedResponse = jsonDecode(response.body);
+
+      List<CommentModel> comments = decodedResponse.map((comment) {
+        return CommentModel.fromJson(comment);
+      }).toList();
+
+      return comments;
+    } catch (e) {
+      debugPrint(e.toString());
+      // TODO:: log error when converting to post model (malformed response)
+    }
+    return [];
+  }
 }

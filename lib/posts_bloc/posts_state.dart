@@ -4,8 +4,9 @@ part of 'posts_bloc.dart';
 class PostsState {
   final List<PostModel>? posts;
   final PostModel? activePost;
+  final List<CommentModel>? comments;
 
-  const PostsState({this.activePost, this.posts});
+  const PostsState({this.activePost, this.posts, this.comments});
 }
 
 class PostsInitial extends PostsState {}
@@ -30,18 +31,19 @@ class ActivePostFailedToLoad extends PostsState {
 }
 
 class ActivePostLoading extends PostsState {
-  const ActivePostLoading({super.posts});
+  const ActivePostLoading({super.posts, super.activePost});
 }
 
 // Active Post Comments
 class ActivePostCommentsLoaded extends PostsState {
-  const ActivePostCommentsLoaded({required super.activePost, super.posts});
+  const ActivePostCommentsLoaded(
+      {required super.comments, super.activePost, super.posts});
 }
 
 class ActivePostCommentsFailedToLoad extends PostsState {
-  const ActivePostCommentsFailedToLoad({super.posts});
+  const ActivePostCommentsFailedToLoad({super.posts, super.activePost});
 }
 
 class ActivePostCommentsLoading extends PostsState {
-  const ActivePostCommentsLoading({super.posts});
+  const ActivePostCommentsLoading({super.posts, super.activePost});
 }
