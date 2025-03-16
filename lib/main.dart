@@ -4,28 +4,43 @@ import 'package:flutter_tech_task/screens/post_details_screen.dart';
 import 'package:flutter_tech_task/screens/post_list_screen.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (context) => PostsBloc())],
-      child: const MyApp()));
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
+  final GoRouter _router = GoRouter(
+    initialLocation: '/list',
+    routes: [
+      GoRoute(
+        path: '/list',
+        builder: (BuildContext context, GoRouterState state) {
+          return const PostListScreen();
+        },
+      ),
+      GoRoute(
+        path: '/details/:id',
+        builder: (BuildContext context, GoRouterState state) {
+          final int postId = int.parse(state.pathParameters['id'] ?? '0');
+          return PostDetailsScreen(postId: postId);
+        },
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: 'list/',
-      routes: {
-        "list/": (context) => const PostListScreen(),
-        "details/": (context) => const PostDetailsScreen(),
-      },
+      routerConfig: _router,
     );
   }
 }
