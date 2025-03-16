@@ -37,7 +37,7 @@ class _DetailsPageState extends State<PostDetailsScreen> {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Container(height: 10),
+                  const SizedBox(height: 10),
                   Text(state.activePost!.body,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),

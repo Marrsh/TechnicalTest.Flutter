@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tech_task/models/post_model.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
+import 'package:flutter_tech_task/widgets/list_card.dart';
 import 'package:go_router/go_router.dart';
 
 class PostListScreen extends StatefulWidget {
@@ -35,29 +36,12 @@ class _ListPageState extends State<PostListScreen> {
 
             return ListView(
               children: posts.map((post) {
-                return InkWell(
-                  onTap: () {
-                    context.go('/details/${post.id}');
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          post.title,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(post.body),
-                        Container(height: 10),
-                        const Divider(
-                          thickness: 1,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                return ListCard(
+                    onTap: () {
+                      context.go('/details/${post.id}');
+                    },
+                    title: post.title,
+                    body: post.body);
               }).toList(),
             );
           }
