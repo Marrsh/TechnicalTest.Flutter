@@ -1,5 +1,19 @@
 # Bright Flutter Technical Test
 
+
+# Installation
+* Clean the repo, install dependencies
+```
+git clone .....
+cd <repository directory>
+flutter pub get
+```
+
+
+
+
+# Task
+
 ## The Starter Project
 
 This test project uses the JSON placeholder API
