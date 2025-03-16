@@ -31,14 +31,14 @@ class _ListPageState extends State<PostListScreen> {
             // TODO:: Handle failed loading
           }
 
-          if (postsState is PostsLoaded) {
+          if (postsState.posts != null) {
             List<PostModel> posts = postsState.posts!;
 
             return ListView(
               children: posts.map((post) {
                 return ListCard(
                     onTap: () {
-                      context.go('/details/${post.id}');
+                      context.push('/details/${post.id}');
                     },
                     title: post.title,
                     body: post.body);

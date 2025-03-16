@@ -28,10 +28,21 @@ class _DetailsPageState extends State<PostDetailsScreen> {
       ),
       body: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
-          if (state is ActivePostLoaded) {
+          if (state is ActivePostFailedToLoad) {
+            // TODO:: handle failed state to user
+          }
+          if (state.activePost != null) {
             return Container(
                 padding: const EdgeInsets.all(15),
                 child: Column(children: [
+                  // TODO:: add save comment to offline
+
+                  // TODO:: create new post list screen to show offline posts
+                  // TODO:: USE TABS
+
+                  // TODO:: ADD badge to tabbed page
+                  // TODO:: Just show product info
+
                   Text(
                     state.activePost!.title,
                     style: const TextStyle(
@@ -43,9 +54,14 @@ class _DetailsPageState extends State<PostDetailsScreen> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                       onPressed: () {
-                        context.go('/details/${widget.postId}/comments');
+                        context.push('/details/${widget.postId}/comments');
                       },
-                      child: const Text('See Comments'))
+                      child: const Text('See Comments')),
+                  ElevatedButton(
+                      onPressed: () {
+                        // TODO:: Handle save post
+                      },
+                      child: const Text('Save Post'))
                 ]));
           }
 

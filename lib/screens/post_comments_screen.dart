@@ -29,7 +29,10 @@ class _PostCommentsScreenState extends State<PostCommentsScreen> {
         ),
         body: BlocBuilder<PostsBloc, PostsState>(
           builder: (context, state) {
-            if (state is ActivePostCommentsLoaded) {
+            if (state is ActivePostCommentsFailedToLoad) {
+              // TODO:: handle failed state to user
+            }
+            if (state.comments != null) {
               List<CommentModel> comments = state.comments!;
               return ListView(
                 children: comments.map((comment) {
