@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tech_task/helpers/network_helper.dart';
 import 'package:flutter_tech_task/models/comment_model.dart';
 import 'package:flutter_tech_task/models/post_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PostRepository {
   Future<List<PostModel>> getPosts() async {
@@ -57,5 +58,45 @@ class PostRepository {
       // TODO:: log error when converting to post model (malformed response)
     }
     return [];
+  }
+
+  static const String _postKey = 'post_key';
+
+  savePost(PostModel post) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<PostModel> posts = getSavedPosts();
+
+      List<Map<String, dynamic>> postsJson =
+          posts.map((post) => post.toJson()).toList();
+
+      postsJson.add(post.toJson()); // Add new post to existing list
+
+      String stringifiedPosts = jsonEncode(postsJson);
+
+      await prefs.setString(_postKey, stringifiedPosts);
+    } catch (e) {
+      // TODO:: LOG
+      debugPrint(e.toString());
+    }
+  }
+
+  getSavedPosts() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? postJson = prefs.getString(_postKey);
+
+      if (postJson != null) {
+        List<Map<String, dynamic>> decodedPosts = jsonDecode(postJson);
+
+        List<PostModel> posts = decodedPosts.map((post) {
+          return PostModel.fromJson(post);
+        }).toList();
+        return posts;
+      }
+    } catch (e) {
+      //TODO:: Handle error
+      debugPrint(e.toString());
+    }
   }
 }
