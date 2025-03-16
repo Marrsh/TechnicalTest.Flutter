@@ -1,5 +1,6 @@
 // router.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_tech_task/screens/post_comments_screen.dart';
 import 'package:flutter_tech_task/screens/post_details_screen.dart';
 import 'package:flutter_tech_task/screens/post_list_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -15,12 +16,19 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/details/:id',
-        builder: (BuildContext context, GoRouterState state) {
-          final int postId = int.parse(state.pathParameters['id'] ?? '0');
-          return PostDetailsScreen(postId: postId);
-        },
-      ),
+          path: '/details/:id',
+          builder: (BuildContext context, GoRouterState state) {
+            final int postId = int.parse(state.pathParameters['id'] ?? '0');
+            return PostDetailsScreen(postId: postId);
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'comments',
+              builder: (BuildContext context, GoRouterState state) {
+                return const PostCommentsScreen();
+              },
+            ),
+          ]),
     ],
   );
 }

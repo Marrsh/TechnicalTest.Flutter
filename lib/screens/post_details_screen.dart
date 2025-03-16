@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   final int postId;
@@ -38,11 +39,17 @@ class _DetailsPageState extends State<PostDetailsScreen> {
                   ),
                   Container(height: 10),
                   Text(state.activePost!.body,
-                      style: const TextStyle(fontSize: 16))
+                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                      onPressed: () {
+                        context.go('/details/${widget.postId}/comments');
+                      },
+                      child: const Text('See Comments'))
                 ]));
           }
 
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
