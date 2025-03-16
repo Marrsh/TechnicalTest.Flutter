@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tech_task/models/post_model.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key}) : super(key: key);
@@ -36,8 +37,7 @@ class _ListPageState extends State<PostListScreen> {
               children: posts.map((post) {
                 return InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed('details/', arguments: {'id': post.id});
+                    context.go('/details/${post.id}');
                   },
                   child: Container(
                     padding: const EdgeInsets.only(left: 10, right: 10),

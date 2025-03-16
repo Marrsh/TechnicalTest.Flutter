@@ -25,7 +25,7 @@ class PostRepository {
   }
 
   getPostById({required int postId}) async {
-    var response = await NetworkHelper().get(endpoint: 'post/$postId');
+    var response = await NetworkHelper().get(endpoint: 'posts/$postId');
 
     try {
       var decodedResponse = jsonDecode(response.body);

@@ -1,10 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
 
 class PostDetailsScreen extends StatefulWidget {
-  const PostDetailsScreen({Key? key}) : super(key: key);
+  final int postId;
+  const PostDetailsScreen({Key? key, required this.postId}) : super(key: key);
 
   @override
   State<PostDetailsScreen> createState() => _DetailsPageState();
@@ -14,35 +14,37 @@ class _DetailsPageState extends State<PostDetailsScreen> {
   dynamic post;
 
   @override
-  Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+  void initState() {
+    super.initState();
+    context.read<PostsBloc>().add(ActivePostRequested(postId: widget.postId));
+  }
 
-    return FutureBuilder<dynamic>(
-        future: http.get(Uri.parse(
-            'https://jsonplaceholder.typicode.com/posts/${args?['id']}')),
-        builder: (post, response) {
-          if (response.hasData) {
-            dynamic data = json.decode(response.data!.body);
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Post details'),
-              ),
-              body: Container(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(children: [
-                    Text(
-                      data['title'],
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    Container(height: 10),
-                    Text(data['body'], style: const TextStyle(fontSize: 16))
-                  ])),
-            );
-          } else {
-            return Container();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Post details'),
+      ),
+      body: BlocBuilder<PostsBloc, PostsState>(
+        builder: (context, state) {
+          if (state is ActivePostLoaded) {
+            return Container(
+                padding: const EdgeInsets.all(15),
+                child: Column(children: [
+                  Text(
+                    state.activePost!.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  Container(height: 10),
+                  Text(state.activePost!.body,
+                      style: const TextStyle(fontSize: 16))
+                ]));
           }
-        });
+
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
   }
 }
