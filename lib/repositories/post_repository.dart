@@ -23,4 +23,19 @@ class PostRepository {
 
     return [];
   }
+
+  getPostById({required int postId}) async {
+    var response = await NetworkHelper().get(endpoint: 'post/$postId');
+
+    try {
+      var decodedResponse = jsonDecode(response.body);
+
+      PostModel post = PostModel.fromJson(decodedResponse);
+
+      return post;
+    } catch (e) {
+      debugPrint(e.toString());
+      // TODO:: log error when converting to post model (malformed response)
+    }
+  }
 }

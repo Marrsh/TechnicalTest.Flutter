@@ -5,4 +5,8 @@ class PostsEvent {}
 
 class PostsRequested extends PostsEvent {}
 
-class ActivePostRequested extends PostsEvent {}
+class ActivePostRequested extends PostsEvent {
+  final int postId;
+
+  ActivePostRequested({required this.postId});
+}
