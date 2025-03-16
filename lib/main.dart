@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
 import 'package:flutter_tech_task/screens/post_details_screen.dart';
 import 'package:flutter_tech_task/screens/post_list_screen.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => PostsBloc())],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
