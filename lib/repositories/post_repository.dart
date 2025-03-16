@@ -45,7 +45,7 @@ class PostRepository {
         await NetworkHelper().get(endpoint: 'posts/$postId/comments');
 
     try {
-      var decodedResponse = jsonDecode(response.body);
+      List<dynamic> decodedResponse = jsonDecode(response.body);
 
       List<CommentModel> comments = decodedResponse.map((comment) {
         return CommentModel.fromJson(comment);

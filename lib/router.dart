@@ -25,7 +25,8 @@ class AppRouter {
             GoRoute(
               path: 'comments',
               builder: (BuildContext context, GoRouterState state) {
-                return const PostCommentsScreen();
+                final int postId = int.parse(state.pathParameters['id'] ?? '0');
+                return PostCommentsScreen(postId: postId);
               },
             ),
           ]),
