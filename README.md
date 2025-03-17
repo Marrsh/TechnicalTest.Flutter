@@ -4,7 +4,7 @@
 * Currently only runs on iOS
 
 # Installation
-* Clean the repo, install dependencies
+* Clone the repo, install dependencies
 ```
 git clone .....
 cd <repository directory>
