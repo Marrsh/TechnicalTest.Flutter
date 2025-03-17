@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tech_task/posts_bloc/posts_bloc.dart';
+import 'package:flutter_tech_task/repositories/post_repository.dart';
 import 'package:go_router/go_router.dart';
 
 class PostDetailsScreen extends StatefulWidget {
@@ -59,7 +60,9 @@ class _DetailsPageState extends State<PostDetailsScreen> {
                       child: const Text('See Comments')),
                   ElevatedButton(
                       onPressed: () {
-                        // TODO:: Handle save post
+                        // PostRepository().savePost(state.activePost!);
+
+                        PostRepository().getSavedPosts();
                       },
                       child: const Text('Save Post'))
                 ]));

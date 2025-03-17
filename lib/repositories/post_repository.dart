@@ -65,7 +65,7 @@ class PostRepository {
   savePost(PostModel post) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      List<PostModel> posts = getSavedPosts();
+      List<PostModel> posts = await getSavedPosts() ?? [];
 
       List<Map<String, dynamic>> postsJson =
           posts.map((post) => post.toJson()).toList();
@@ -76,7 +76,7 @@ class PostRepository {
 
       await prefs.setString(_postKey, stringifiedPosts);
     } catch (e) {
-      // TODO:: LOG
+      // TODO:: Handle error
       debugPrint(e.toString());
     }
   }
@@ -87,11 +87,12 @@ class PostRepository {
       String? postJson = prefs.getString(_postKey);
 
       if (postJson != null) {
-        List<Map<String, dynamic>> decodedPosts = jsonDecode(postJson);
+        var decodedPosts = jsonDecode(postJson);
 
-        List<PostModel> posts = decodedPosts.map((post) {
+        List<PostModel> posts = List<PostModel>.from(decodedPosts.map((post) {
           return PostModel.fromJson(post);
-        }).toList();
+        }));
+
         return posts;
       }
     } catch (e) {
