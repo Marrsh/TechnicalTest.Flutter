@@ -54,5 +54,20 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         emit(const ActivePostCommentsFailedToLoad());
       }
     });
+
+    on<SavedPostsRequested>((event, emit) async {
+      List<PostModel>? posts = state.posts;
+      PostModel? post = state.activePost;
+
+      emit(PostsLoading());
+      try {
+        List<PostModel> posts = await PostRepository().getPosts();
+
+        emit(PostsLoaded(posts: posts));
+      } catch (e) {
+        // TODO:: handle error logging
+        emit(PostsFailedToLoad());
+      }
+    });
   }
 }

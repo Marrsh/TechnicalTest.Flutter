@@ -1,6 +1,8 @@
 # Bright Flutter Technical Test
 
 
+* Currently only runs on iOS
+
 # Installation
 * Clean the repo, install dependencies
 ```
@@ -8,8 +10,6 @@ git clone .....
 cd <repository directory>
 flutter pub get
 ```
-
-
 
 
 # Task

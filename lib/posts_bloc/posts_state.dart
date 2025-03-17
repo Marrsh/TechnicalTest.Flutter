@@ -5,8 +5,10 @@ class PostsState {
   final List<PostModel>? posts;
   final PostModel? activePost;
   final List<CommentModel>? comments;
+  final List<PostModel>? savedPosts;
 
-  const PostsState({this.activePost, this.posts, this.comments});
+  const PostsState(
+      {this.activePost, this.posts, this.comments, this.savedPosts});
 }
 
 class PostsInitial extends PostsState {}
@@ -46,4 +48,10 @@ class ActivePostCommentsFailedToLoad extends PostsState {
 
 class ActivePostCommentsLoading extends PostsState {
   const ActivePostCommentsLoading({super.posts, super.activePost});
+}
+
+// Saved posts
+class SavedPostsLoaded extends PostsState {
+  const SavedPostsLoaded(
+      {required super.savedPosts, super.activePost, super.posts});
 }

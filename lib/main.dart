@@ -9,8 +9,13 @@ void main() {
       child: const MyApp()));
 }
 
+// TODO:: create new post list screen to show offline posts
+
+// TODO:: set up tabbed pages
+
+// TODO:: ADD badge to tabbed page
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

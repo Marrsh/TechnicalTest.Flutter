@@ -16,3 +16,7 @@ class ActivePostCommentsRequested extends PostsEvent {
 
   ActivePostCommentsRequested({required this.postId});
 }
+
+class SavedPostsRequested extends PostsEvent {
+  SavedPostsRequested();
+}

@@ -36,14 +36,6 @@ class _DetailsPageState extends State<PostDetailsScreen> {
             return Container(
                 padding: const EdgeInsets.all(15),
                 child: Column(children: [
-                  // TODO:: add save comment to offline
-
-                  // TODO:: create new post list screen to show offline posts
-                  // TODO:: USE TABS
-
-                  // TODO:: ADD badge to tabbed page
-                  // TODO:: Just show product info
-
                   Text(
                     state.activePost!.title,
                     style: const TextStyle(
@@ -60,9 +52,9 @@ class _DetailsPageState extends State<PostDetailsScreen> {
                       child: const Text('See Comments')),
                   ElevatedButton(
                       onPressed: () {
-                        // PostRepository().savePost(state.activePost!);
+                        PostRepository().savePost(state.activePost!);
 
-                        PostRepository().getSavedPosts();
+                        // TODO:: add bloc
                       },
                       child: const Text('Save Post'))
                 ]));
