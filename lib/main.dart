@@ -14,6 +14,8 @@ void main() {
 // TODO:: set up tabbed pages
 
 // TODO:: ADD badge to tabbed page
+
+// TODO:: Upgrade Android gradle plugins for building to Android
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
