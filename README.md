@@ -11,6 +11,12 @@ cd <repository directory>
 flutter pub get
 ```
 
+### TODO:
+* create new post list screen to show offline posts
+* set up tabbed pages
+*  ADD badge to tabbed page
+* Upgrade Android gradle plugins for building to Android
+
 
 # Task
 
